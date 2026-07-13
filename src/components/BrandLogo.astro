@@ -1,0 +1,69 @@
+---
+interface Props {
+	variant?: 'primary' | 'light' | 'mono';
+	iconOnly?: boolean;
+	size?: number;
+	class?: string;
+}
+
+const {
+	variant = 'primary',
+	iconOnly = false,
+	size = 36,
+	class: className,
+} = Astro.props;
+---
+
+<span class:list={['brand-logo', `brand-logo--${variant}`, className]}>
+	<svg
+		class="brand-logo__icon"
+		width={size}
+		height={size}
+		viewBox="0 0 64 64"
+		fill="none"
+		role={iconOnly ? 'img' : undefined}
+		aria-label={iconOnly ? 'MyPeppers' : undefined}
+		aria-hidden={iconOnly ? undefined : 'true'}
+	>
+		<circle class="brand-logo__ring" cx="32" cy="32" r="26" />
+		<path class="brand-logo__profile" d="M40.5 16.5c-6.8 1.4-11.3 6.2-11.3 12.3 0 3.8 1.7 6.6 4.1 8.8 1.9 1.7 2.7 3.5 2.6 5.9-.1 1.8-.8 3.2-2.2 4.6" />
+		<path class="brand-logo__profile" d="M29.5 27.2c2.4.1 4.3-.6 5.7-2.1M32.6 31.5c1.2.4 2.3.4 3.4-.1" />
+		<path class="brand-logo__rhythm" d="M12 43.5h9l3.4-5.2 4.2 8.2 4-5.2h7.9" />
+		<circle class="brand-logo__point" cx="12" cy="43.5" r="3" />
+		<circle class="brand-logo__point" cx="40.5" cy="41.3" r="3" />
+		<circle class="brand-logo__point" cx="46.8" cy="18.8" r="3" />
+	</svg>
+	{!iconOnly && <span class="brand-logo__wordmark">MyPeppers</span>}
+</span>
+
+<style>
+	.brand-logo {
+		display: inline-flex;
+		align-items: center;
+		gap: 11px;
+		color: var(--red-primary, #c9363e);
+	}
+	.brand-logo__icon { flex: 0 0 auto; overflow: visible; }
+	.brand-logo__ring,
+	.brand-logo__profile,
+	.brand-logo__rhythm {
+		stroke: currentColor;
+		stroke-width: 2.4;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+	.brand-logo__ring { stroke-width: 2; opacity: .42; }
+	.brand-logo__point { fill: currentColor; stroke: var(--surface, #fff); stroke-width: 1.8; }
+	.brand-logo__wordmark {
+		color: var(--red-deep, #8f1f28);
+		font-size: 21px;
+		font-weight: 780;
+		letter-spacing: -.8px;
+	}
+	.brand-logo--light { color: #fff; }
+	.brand-logo--light .brand-logo__wordmark { color: #fff; }
+	.brand-logo--light .brand-logo__point { stroke: var(--red-deep, #8f1f28); }
+	.brand-logo--mono { color: currentColor; }
+	.brand-logo--mono .brand-logo__wordmark { color: currentColor; }
+	.brand-logo--mono .brand-logo__point { stroke: var(--surface, #fff); }
+</style>
